@@ -24,7 +24,7 @@ products.forEach((product) =>{
             </div>
 
             <div class="product-quantity-container">
-                <select>
+                <select class="js-quantity-selector-${product.id}">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -40,7 +40,7 @@ products.forEach((product) =>{
 
             <div class="product-spacer"></div>
 
-            <div class="added-to-cart">
+            <div class="added-to-cart js-added-to-cart-${product.id}">
                 <img src="images/icons/checkmark.png">
                 Added
             </div>
@@ -58,7 +58,13 @@ products.forEach((product) =>{
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
     button.addEventListener("click", () =>{
-        const  productId =  button.dataset.productId;
+        
+        // const  productId =  button.dataset.productId;
+        // using the shorthand
+        const {productId} = button.dataset;
+
+        const value = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+
         let matchingItem;
         cart.forEach((item) =>{
             if (productId === item.productId){
@@ -67,12 +73,12 @@ document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
         });
 
         if (matchingItem){
-            matchingItem.quantity +=1;
+            matchingItem.quantity +=value;
         }
         else{
             cart.push({
                 productId: productId,
-                quantity:1
+                quantity:value
             })
         }
         let cartQuantity = 0;
@@ -80,10 +86,26 @@ document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
             cartQuantity += item.quantity;
         });
 
+        const addedMessageTimeouts = {};
+
         document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-        console.log(cartQuantity);
+        //making the added pop up show up when the add to cart button is clicked
+        const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`)
+        addedMessage.classList.add("show-added");
+        const previousTimeoutId = addedMessageTimeouts[productId];
+
+        if (previousTimeoutId){
+            clearTimeout(previousTimeoutId);
+        }
+        const timeoutId = setTimeout(()=>{
+            addedMessage.classList.remove("show-added")
+        }, 2000);
+        //save the timeoutID for this product so we can stop it later if the need be
+        addedMessageTimeouts[productId] = timeoutId;
         console.log(cart);
         console.log(" ");
     })
 })
+
+
 

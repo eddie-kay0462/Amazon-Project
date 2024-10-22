@@ -656,5 +656,56 @@ const products = [
       "apparel",
       "mens"
     ]
-  }
+  },
+{
+  //atart
+  id: "b93d7482-5492-4fb7-b8b3-a9f2c9dd8c14",
+  image: "images/products/leather-backpack.jpg",
+  name: "Vintage Leather Backpack",
+  rating: {
+    stars: 4.5,
+    count: 189
+  },
+  priceCents: 5999,
+  keywords: [
+    "bags",
+    "leather goods",
+    "accessories",
+    "backpacks"
+  ]
+},
+{
+  id: "c47e8124-abc3-4c7d-b649-7e789213d560",
+  image: "images/products/wireless-earbuds.jpeg",
+  name: "Premium Wireless Earbuds",
+  rating: {
+    stars: 4,
+    count: 342
+  },
+  priceCents: 12999,
+  keywords: [
+    "electronics",
+    "audio",
+    "accessories",
+    "wireless"
+  ]
+},
+{
+  id: "f582d641-935c-4a9d-9b11-8c55982b4330",
+  image: "images/products/yoga-mat.jpeg",
+  name: "Eco-Friendly Yoga Mat",
+  rating: {
+    stars: 4.5,
+    count: 167
+  },
+  priceCents: 3499,
+  keywords: [
+    "fitness",
+    "yoga",
+    "exercise",
+    "wellness"
+  ]
+}
+
+  
 ];
