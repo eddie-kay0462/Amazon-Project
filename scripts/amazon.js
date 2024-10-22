@@ -102,8 +102,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
         }, 2000);
         //save the timeoutID for this product so we can stop it later if the need be
         addedMessageTimeouts[productId] = timeoutId;
-        console.log(cart);
-        console.log(" ");
     })
 })
 
