@@ -1,3 +1,4 @@
+import {cart} from "../data/cart.js"
 let productsHTML = '';
 products.forEach((product) =>{
     productsHTML+= `
@@ -58,7 +59,6 @@ products.forEach((product) =>{
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
     button.addEventListener("click", () =>{
-        
         // const  productId =  button.dataset.productId;
         // using the shorthand
         const {productId} = button.dataset;
