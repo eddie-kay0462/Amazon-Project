@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js"
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 let productsHTML = '';
 products.forEach((product) =>{
@@ -54,7 +54,15 @@ products.forEach((product) =>{
     `;
 })
 
-
+//update cart quantity
+function updateCartQuantity()
+{
+    let cartQuantity = 0;
+    cart.forEach((cartItem) =>{
+        cartQuantity += cartItem.quantity;
+    });
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
 
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
@@ -66,30 +74,12 @@ document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
 
         const value = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 
-        let matchingItem;
-        cart.forEach((item) =>{
-            if (productId === item.productId){
-                matchingItem = item;
-            }
-        });
-
-        if (matchingItem){
-            matchingItem.quantity +=value;
-        }
-        else{
-            cart.push({
-                productId: productId,
-                quantity:value
-            })
-        }
-        let cartQuantity = 0;
-        cart.forEach((item) =>{
-            cartQuantity += item.quantity;
-        });
+        addToCart(productId, value);
+        
+        updateCartQuantity();
 
         const addedMessageTimeouts = {};
 
-        document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
         //making the added pop up show up when the add to cart button is clicked
         const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`)
         addedMessage.classList.add("show-added");
