@@ -1,2 +1,2 @@
-# Amazon-Project
+# Amazon-Clone
 # Copy-Of-Amazon-Website
